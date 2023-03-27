@@ -1,0 +1,8 @@
+# IntelliJ CLion
+/cmake-build-*/
+
+# Microsoft Visual Studio Code
+/build/
+
+# Microsoft Visual Studio
+/out/

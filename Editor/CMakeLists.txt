@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 3.24)
+
+project(Editor)
+
+set(CMAKE_CXX_STANDARD 17)
+
+find_package(OpenGL REQUIRED)
+find_package(glad REQUIRED)
+find_package(glfw3 REQUIRED)
+find_package(imgui REQUIRED)
+find_package(spdlog REQUIRED)
+
+add_executable(${PROJECT_NAME} src/Main.cpp)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL)
+target_link_libraries(${PROJECT_NAME} PRIVATE glad::glad)
+target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
+target_link_libraries(${PROJECT_NAME} PRIVATE imgui::imgui)
+target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)

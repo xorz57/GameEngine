@@ -1,0 +1,17 @@
+{
+  "name": "application",
+  "version-string": "0.1.0",
+  "dependencies": [
+    "opengl",
+    "glad",
+    "glfw3",
+    {
+      "name": "imgui",
+      "features": [
+        "glfw-binding",
+        "opengl3-binding"
+      ]
+    },
+    "spdlog"
+  ]
+}
