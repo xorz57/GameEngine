@@ -1,9 +1,11 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <cstdlib>
+
 int main() {
     if (!glfwInit()) {
-        return 1;
+        return EXIT_FAILURE;
     }
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -12,7 +14,7 @@ int main() {
     GLFWwindow *window = glfwCreateWindow(1280, 720, "Sandbox", nullptr, nullptr);
     if (window == nullptr) {
         glfwTerminate();
-        return -1;
+        return EXIT_FAILURE;
     }
 
     glfwMakeContextCurrent(window);
@@ -21,7 +23,7 @@ int main() {
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         glfwDestroyWindow(window);
         glfwTerminate();
-        return -1;
+        return EXIT_FAILURE;
     }
 
     while (!glfwWindowShouldClose(window)) {
@@ -41,5 +43,5 @@ int main() {
     glfwDestroyWindow(window);
     glfwTerminate();
 
-    return 0;
+    return EXIT_SUCCESS;
 }
