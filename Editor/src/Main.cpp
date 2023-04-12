@@ -7,6 +7,8 @@
 
 #include <spdlog/spdlog.h>
 
+#include <cstdlib>
+
 static void glfw_error_callback(int error, const char *description) {
     spdlog::error("GLFW Error {}: {}\n", error, description);
 }
@@ -15,7 +17,7 @@ int main() {
     glfwSetErrorCallback(glfw_error_callback);
 
     if (!glfwInit()) {
-        return 1;
+        return EXIT_FAILURE;
     }
 
 #if defined(__APPLE__)
@@ -33,7 +35,7 @@ int main() {
     GLFWwindow *window = glfwCreateWindow(1280, 720, "Editor", nullptr, nullptr);
     if (window == nullptr) {
         glfwTerminate();
-        return 1;
+        return EXIT_FAILURE;
     }
 
     glfwMakeContextCurrent(window);
@@ -42,7 +44,7 @@ int main() {
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         glfwDestroyWindow(window);
         glfwTerminate();
-        return 1;
+        return EXIT_FAILURE;
     }
 
     IMGUI_CHECKVERSION();
@@ -90,5 +92,5 @@ int main() {
     glfwDestroyWindow(window);
     glfwTerminate();
 
-    return 0;
+    return EXIT_SUCCESS;
 }
