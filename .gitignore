@@ -5,4 +5,5 @@
 /build/
 
 # Microsoft Visual Studio
+/.vs/
 /out/
