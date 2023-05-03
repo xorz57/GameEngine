@@ -13,7 +13,12 @@ static void glfw_error_callback(int error, const char *description) {
     spdlog::error("GLFW Error {}: {}\n", error, description);
 }
 
+#ifdef _WIN32
+#include <Windows.h>
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow) {
+#else
 int main() {
+#endif
     glfwSetErrorCallback(glfw_error_callback);
 
     if (!glfwInit()) {

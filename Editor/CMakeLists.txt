@@ -10,7 +10,11 @@ find_package(glfw3 REQUIRED)
 find_package(imgui REQUIRED)
 find_package(spdlog REQUIRED)
 
-add_executable(${PROJECT_NAME} src/Main.cpp)
+if(WIN32)
+	add_executable(${PROJECT_NAME} WIN32 src/Main.cpp)
+else()
+	add_executable(${PROJECT_NAME} src/Main.cpp)
+endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL)
 target_link_libraries(${PROJECT_NAME} PRIVATE glad::glad)
