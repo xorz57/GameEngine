@@ -1,10 +1,11 @@
 #include "Application.hpp"
 
-#include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
 #include <spdlog/spdlog.h>
+
+#include <cstdlib>
 
 Application::Application() {
     glfwSetErrorCallback(glfw_error_callback);
@@ -25,17 +26,17 @@ Application::Application() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 #endif
 
-    window = glfwCreateWindow(1280, 720, "Editor", nullptr, nullptr);
-    if (window == nullptr) {
+    mWindow = glfwCreateWindow(1280, 720, "Editor", nullptr, nullptr);
+    if (mWindow == nullptr) {
         glfwTerminate();
         std::exit(EXIT_FAILURE);
     }
 
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(mWindow);
     glfwSwapInterval(1);
 
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
-        glfwDestroyWindow(window);
+        glfwDestroyWindow(mWindow);
         glfwTerminate();
         std::exit(EXIT_FAILURE);
     }
@@ -47,7 +48,7 @@ Application::Application() {
 
     ImGui::StyleColorsDark();
 
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplGlfw_InitForOpenGL(mWindow, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 }
 
@@ -56,38 +57,40 @@ Application::~Application() {
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
-    glfwDestroyWindow(window);
+    glfwDestroyWindow(mWindow);
     glfwTerminate();
 }
 
 void Application::Run() {
-    auto color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(mWindow)) {
         glfwPollEvents();
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        ImGui::Begin("Hello, World!");
-        ImGui::ColorEdit3("Clear Color", (float *) &color);
-        ImGui::End();
+        Update();
 
         ImGui::Render();
 
         int display_w;
         int display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
+        glfwGetFramebufferSize(mWindow, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
 
-        glClearColor(color.x, color.y, color.z, color.w);
+        glClearColor(mClearColor.x, mClearColor.y, mClearColor.z, mClearColor.w);
         glClear(GL_COLOR_BUFFER_BIT);
 
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(mWindow);
     }
+}
+
+void Application::Update() {
+    ImGui::Begin("Settings");
+    ImGui::ColorEdit3("Clear Color", (float *) &mClearColor);
+    ImGui::End();
 }
 
 void Application::glfw_error_callback(int error, const char *description) {
