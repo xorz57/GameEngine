@@ -9,7 +9,8 @@ public:
     ~Application();
 
     void Run();
+    void Update();
 
 private:
-    GLFWwindow *window;
+    GLFWwindow *mWindow;
 };
