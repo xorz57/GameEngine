@@ -11,9 +11,9 @@ find_package(imgui REQUIRED)
 find_package(spdlog REQUIRED)
 
 if(WIN32)
-	add_executable(${PROJECT_NAME} WIN32 src/Main.cpp)
+	add_executable(${PROJECT_NAME} WIN32 src/Main.cpp src/Application.cpp)
 else()
-	add_executable(${PROJECT_NAME} src/Main.cpp)
+	add_executable(${PROJECT_NAME} src/Main.cpp src/Application.cpp)
 endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL)
