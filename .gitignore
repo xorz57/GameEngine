@@ -1,4 +1,5 @@
 # IntelliJ CLion
+/.idea/
 /cmake-build-*/
 
 # Microsoft Visual Studio Code
