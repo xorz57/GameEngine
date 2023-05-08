@@ -2,6 +2,7 @@
 /cmake-build-*/
 
 # Microsoft Visual Studio Code
+/.vscode/
 /build/
 
 # Microsoft Visual Studio
