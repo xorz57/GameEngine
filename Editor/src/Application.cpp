@@ -26,7 +26,25 @@ Application::Application() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 #endif
 
+#define MODE 1
+
+#if defined(MODE) && MODE == 1
+    const auto monitor = glfwGetPrimaryMonitor();
+
+    mWindow = glfwCreateWindow(1920, 1080, "Editor", monitor, nullptr);
+#elif defined(MODE) && MODE == 2
+    const auto monitor = glfwGetPrimaryMonitor();
+    const auto mode = glfwGetVideoMode(monitor);
+
+    glfwWindowHint(GLFW_RED_BITS, mode->redBits);
+    glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
+    glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
+    glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
+
+    mWindow = glfwCreateWindow(mode->width, mode->height, "Editor", monitor, nullptr);
+#elif defined(MODE) && MODE == 3
     mWindow = glfwCreateWindow(1280, 720, "Editor", nullptr, nullptr);
+#endif
     if (mWindow == nullptr) {
         glfwTerminate();
         std::exit(EXIT_FAILURE);
