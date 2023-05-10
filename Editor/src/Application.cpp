@@ -7,6 +7,8 @@
 
 #include <cstdlib>
 
+#define MODE 1
+
 Application::Application() {
     glfwSetErrorCallback(glfw_error_callback);
 
@@ -25,8 +27,6 @@ Application::Application() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 #endif
-
-#define MODE 1
 
 #if defined(MODE) && MODE == 1
     const auto monitor = glfwGetPrimaryMonitor();

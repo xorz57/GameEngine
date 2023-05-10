@@ -2,6 +2,8 @@
 
 #include <cstdlib>
 
+#define MODE 1
+
 Application::Application() {
     if (!glfwInit()) {
         std::exit(EXIT_FAILURE);
@@ -16,8 +18,6 @@ Application::Application() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 #endif
-
-#define MODE 1
 
 #if defined(MODE) && MODE == 1
     const auto monitor = glfwGetPrimaryMonitor();
