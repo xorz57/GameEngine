@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install packages
+    - name: Install GLFW Dependencies
       run: apt install -y libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
 
     - name: Install vcpkg
