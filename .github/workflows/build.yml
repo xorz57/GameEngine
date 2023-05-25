@@ -16,7 +16,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install GLFW Dependencies
-        run: sudo apt-get install -y libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
       - name: Install vcpkg
         run: |
           git clone https://github.com/microsoft/vcpkg.git
